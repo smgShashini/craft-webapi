@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CraftWebApi.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,9 @@ namespace CraftWebApi.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
+
         }
+      
+        public DbSet<Item> Items { get; set; }
     }
 }
