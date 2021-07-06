@@ -1,5 +1,5 @@
 ﻿using CraftWebApi.Data;
-using CraftWebApi.Data.Repo;
+using CraftWebApi.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,20 +15,23 @@ namespace CraftWebApi.Controllers
     public class ItemController : ControllerBase
 
     {
-        private readonly DataContext dc;
-        private readonly ItemInterface repo;
+        private readonly UnitOfWorkInterface uow;
 
-        public ItemController(DataContext dc, ItemInterface repo)
+        //private readonly DataContext dc;
+        //private readonly ItemInterface repo;
+
+        public ItemController(UnitOfWorkInterface uow)
         {
-            this.dc = dc;
-            this.repo = repo;
+            //this.dc = dc;
+            //this.repo = repo;
+            this.uow = uow;
         }
         //private readonly DataContext dc;
        
         [HttpGet]
         public async Task<ActionResult> GetItems()
         {
-            var itemlist = await repo.GetItemsAsync();
+            var itemlist = await uow.ItemRepository.GetItemsAsync();
             return Ok(itemlist);
         }
     }
