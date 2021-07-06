@@ -1,4 +1,5 @@
 ﻿using CraftWebApi.Data;
+using CraftWebApi.Data.Repo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,20 +13,23 @@ namespace CraftWebApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class ItemController : ControllerBase
+
     {
         private readonly DataContext dc;
-        public ItemController(DataContext  dc )
+        private readonly ItemInterface repo;
+
+        public ItemController(DataContext dc, ItemInterface repo)
         {
             this.dc = dc;
+            this.repo = repo;
         }
-
+        //private readonly DataContext dc;
+       
         [HttpGet]
-        public async Task<IActionResult> GetItemList()
+        public async Task<ActionResult> GetItems()
         {
-            var doclist = await dc.Items.ToListAsync();
-            return Ok(doclist);
-
-
+            var itemlist = await repo.GetItemsAsync();
+            return Ok(itemlist);
         }
     }
 }
