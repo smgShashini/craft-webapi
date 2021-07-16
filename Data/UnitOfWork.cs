@@ -13,5 +13,9 @@ namespace CraftWebApi.Data
         }
         public ItemInterface ItemRepository =>
             new ItemRepository(dc);
+
+
+        public IProductInterface ProductRepository =>
+            new ProductRepository(dc);
     }
 }

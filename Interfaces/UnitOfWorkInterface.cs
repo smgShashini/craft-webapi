@@ -8,5 +8,6 @@ namespace CraftWebApi.Interfaces
      public interface UnitOfWorkInterface
     {
         ItemInterface ItemRepository { get; }
+        IProductInterface ProductRepository { get; }
     }
 }
